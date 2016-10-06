@@ -1,7 +1,6 @@
 # shortly
-URL Shortner REST API, Generates shorten url for any original url and store in a SQLite Database
-Methods implemented:
-GET,POST,PUT
+URL Shortner REST API, Generates shorten url for any original url and store in a SQLite Database.
+- Methods implemented: GET, POST, PUT
 
 
 ## Requirements
