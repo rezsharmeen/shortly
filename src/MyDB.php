@@ -15,9 +15,9 @@ class MyDB {
     /**
      * Construct database connection string
      */
-    private function __construct() {
-        $connectionKey = 'sqlite:./shortly.db';
-        $this->dbConn  = new PDO($connectionKey) or die('cannot open the database');
+    private function __construct($dbPath) {
+        $connectionKey = ($dbPath) ? $dbPath : './shortly.db';
+        $this->dbConn  = new PDO("sqlite:".$connectionKey) or die('cannot open the database');
         $this->dbConn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     }
     
@@ -26,9 +26,9 @@ class MyDB {
      * Get an instance of the Database
      * @return Object
      */
-    public static function getInstance() {
+    public static function getInstance($dbPath = null) {
         if(empty(self::$instance)){ // If no instance then make one
-            self::$instance = new MyDB();
+            self::$instance = new MyDB($dbPath);
         }
         return self::$instance;
     }
@@ -48,7 +48,7 @@ class MyDB {
     }
     
     /**
-     * Query te database for original url, based on key and device type 
+     * Query the database for original url, based on key and device type 
      * @param String $key
      * @param String $device
      * @return String
@@ -61,7 +61,7 @@ class MyDB {
             AND d.deviceType = :device
             AND s.keyId = k.id
             AND s.deviceId = d.id");
-            
+
             $stmt->bindParam(":key", $key);
             $stmt->bindParam(":device", $device);
             if ($stmt->execute()) {
@@ -99,10 +99,11 @@ class MyDB {
             $stmt->bindParam(":deviceId", $this->getDeviceId($device));
             $stmt->execute();
             
+            return true;
         } catch (Exception $exc) {
-            throw new Exception("Data insert failed.");
+            throw new Exception("Data insert failed.");            
         }
-
+        return false;
     }
     
     /**
@@ -122,7 +123,7 @@ class MyDB {
         if ($stmt->execute()) {
             $row = $stmt->fetch();
         }
-        
+        var_dump($row, $key, $this->dbConn->errorInfo());
         if(empty($row)){
             return false;
         }
@@ -134,6 +135,7 @@ class MyDB {
         if($stmt->execute()){
             return true;
         }
+        var_dump($this->dbConn->errorInfo());
         return false;
     }
     

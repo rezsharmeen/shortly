@@ -56,8 +56,8 @@ class Api {
      * @return String
      * @throws Exception
      */
-    public function put() {
-        $_PUT = json_decode(file_get_contents("php://input"), true);
+    public function put($source = "php://input") {
+        $_PUT = json_decode(file_get_contents($source), true);
         if(empty($_PUT["key"]) || empty($_PUT["device"]) || empty($_PUT["url"])){
             throw new Exception("Invalid parameter put.");
         }
@@ -65,6 +65,7 @@ class Api {
         $url = $_PUT["url"];
         $device = !empty($_POST["device"]) ? $_POST["device"] : Utils::getDeviceType();
         try {
+            var_dump($key, $url, $device);
             $boolStatus = MyDB::getInstance()->put($key, $url, $device);
         } catch (Exception $exc) {
             throw new Exception("Operation failed.");

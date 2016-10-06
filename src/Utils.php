@@ -16,6 +16,9 @@ class Utils {
      * @return string
      */
     public static function getDeviceType() {
+        if(empty($_SERVER["HTTP_USER_AGENT"])){
+            return "Desktop";
+        }
         if (preg_match("/(tablet|ipad|playbook)|(android(?!.*(mobi|opera mini)))/i", strtolower($_SERVER["HTTP_USER_AGENT"]))) {
             return "Tablet";
         }
