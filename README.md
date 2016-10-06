@@ -1,6 +1,6 @@
 # shortly
-URL Shortner REST API, Generates shorten url for any original url and store in a SQLite Database.
-- Methods implemented: GET, POST, PUT
+A REST application to generate short url for any url and store in a SQLite Database.
+- Available API: GET, POST, PUT
 
 
 ## Requirements
@@ -14,7 +14,7 @@ URL Shortner REST API, Generates shorten url for any original url and store in a
 <VirtualHost *:80>
     DocumentRoot "PATH_TO_SRC/shortly/src"
     ServerName short.ly
-        <Directory "ATH_TO_SRC/shortly/src">
+        <Directory "PATH_TO_SRC/shortly/src">
            Options All
            AllowOverride All
            Require all granted
