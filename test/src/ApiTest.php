@@ -42,7 +42,7 @@ class ApiTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testGet().
      */
     public function testGet() {
-        $data = MyDB::getInstance()->getAll();
+        $data = $this->object->get();
         $this->assertEmpty($data);
     }
 
@@ -64,7 +64,6 @@ class ApiTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testPut().
      */
     public function testPut() {
-        $time = time();
         $_POST["url"] = "http://cnn.com";
         $_POST["device"] = "Desktop";
         $data = $this->object->post();
