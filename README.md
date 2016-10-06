@@ -11,7 +11,7 @@ GET,POST,PUT
 ## Installation
 
 - Create virtualhost in httpd-vhosts.conf
-#SHORT.LY
+```bash
 <VirtualHost *:80>
     DocumentRoot "PATH_TO_SRC/shortly/src"
     ServerName short.ly
@@ -23,7 +23,7 @@ GET,POST,PUT
     ErrorLog "/private/var/log/apache2/shortly-error_log"
     CustomLog "/private/var/log/apache2/shortly-access_log" common
 </VirtualHost>
-
+```
 - Edit hosts file:
 127.0.0.1 short.ly
 
