@@ -34,3 +34,26 @@ A REST application to generate short url for any url and store in a SQLite Datab
 - Can retrieve a list of all existing shortened URLs, including time since creation and target URLs (each with number of redirects).
 - API requests and responses should be JSON formatted.
 
+
+## URL examples
+* Retrieve a list of all existing shortened URLs:
+    * GET http://short.ly/
+* Route to target URL:
+    * GET http://short.ly/{key}
+* Submit any URL:
+```bash
+    POST  HTTP/1.1
+    Host: short.ly
+    Cache-Control: no-cache
+    Content-Type: application/x-www-form-urlencoded
+    url=google.com%2F
+```
+* Configure shortened URL based on device type
+    ```bash
+    PUT  HTTP/1.1
+    Host: short.ly
+    Content-Type: application/x-www-form-urlencoded
+    Cache-Control: no-cache
+
+{"key":"{key}","device":"Mobile","url":"google.com"}
+```
